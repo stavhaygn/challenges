@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  web:
+    image: tiangolo/uwsgi-nginx-flask:python3.8-alpine
+    volumes:
+      - ./app:/app
+    restart: always
+    networks:
+      static-network:
+        ipv4_address: 172.29.0.100
+
+networks:
+  static-network:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.29.0.0/24
+          gateway: 172.29.0.1
